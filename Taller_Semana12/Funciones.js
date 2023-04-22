@@ -30,9 +30,9 @@ function CrearParalepipedo(lado, base) {
 }
 /**
  * RotarObjeto: Construye 2 paralepides y los retorna.  
- * ENTRADAS: Objeto = Objeto THREE.js que se desea rotar.
- *           Eje = Eje en el cual se realizara la rotacion.
- *           Angulo = El ángulo de rotación en radianes.
+ * ENTRADAS: objeto = Objeto THREE.js que se desea rotar.
+ *           eje = Eje en el cual se realizara la rotacion.
+ *           angulo = El ángulo de rotación en radianes.
 */
 function RotarObjeto( objeto, eje, angulo) {
     
@@ -43,9 +43,10 @@ function RotarObjeto( objeto, eje, angulo) {
 }
 /**
  * CrearParalepipedo: Construye 2 paralepides y los retorna
- * ENTRADAS: lado = Variable num, tamaño del lado del paralepipedo que se crearán en la escena.
- *           base = Variable num, tamaño de la base y ancho del paralepipedo que se crearán en la escena.
- * SALIDAS: paralepipedo = Array con los objetos Mesh de Three.js correspondientes a cada figura.
+ * ENTRADAS: Objeto = Objeto THREE.js que se va a trasladar.
+ *           X = Coordenada en X a la sque se va a trasladar el objeto.
+ *           Y = Coordenada en Y a la sque se va a trasladar el objeto.
+ *           Z = Coordenada en Z a la sque se va a trasladar el objeto.
 */
 function TrasladarObjeto( objeto, X, Y, Z) {
 

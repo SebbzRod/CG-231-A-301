@@ -33,33 +33,35 @@ camera.position.y = 12;
 camera.position.x = 12;
 const light = new THREE.AmbientLight(0x404040, 5);
 
-var lado = 7;
-var base = 1;
+var lado = 10;
+var base = 0.2 * lado;
 
 var beta = 11*Math.PI/6;
-var alfa = 7*Math.PI/4;
-var gama = 0
+var alfa = Math.PI/2;
+var gamma = 7*Math.PI/4;
 
 //Generamos las figuras
 const paralepipedo = CrearParalepipedo(lado, base);
 
 //Trasladar objetos
 TrasladarObjeto(paralepipedo[0], 0, lado/2, 0);
-TrasladarObjeto(paralepipedo[1], 0, 3*lado/2- 0.7, lado/8 - lado/2 );
-
-paralepipedo[1].rotation.x = alfa 
+TrasladarObjeto(paralepipedo[1], 0, 3*lado/2, 0);
 
 //Agrupamos las figuras
-const grupo = new THREE.Group();
+var arm = new THREE.Object3D();
 
-grupo.add(paralepipedo[0]);
-grupo.add(paralepipedo[1]);
+arm.add(paralepipedo[0]);
+arm.add(paralepipedo[1]);
 
 //Rotamos las figuras
-RotarObjeto(grupo, x, beta);
+RotarObjeto(arm, z, beta);
+RotarObjeto(paralepipedo[1], z, alfa);
+TrasladarObjeto(paralepipedo[1], 3*lado/5, 11*lado/10, 0);
+RotarObjeto(paralepipedo[1], z, -gamma);
+TrasladarObjeto(paralepipedo[1], lado/8 + lado/4, 3*lado/2 - lado/10 , 0);
 
-//Escena/2
+//Escena
 scene.add(arrowX, arrowY, arrowZ, gridHelperXZ, camera, light);
-scene.add(grupo);
+scene.add(arm);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);  
 animate();
