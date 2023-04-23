@@ -27,6 +27,7 @@ function CrearParalepipedo(lado, base) {
     }
   
     return paralepipedo;
+
 }
 /**
  * RotarObjeto: Construye 2 paralepides y los retorna.  
@@ -40,6 +41,7 @@ function RotarObjeto( objeto, eje, angulo) {
     quaternion.setFromAxisAngle(eje, angulo);
   
     objeto.quaternion.multiply(quaternion);
+    
 }
 /**
  * CrearParalepipedo: Construye 2 paralepides y los retorna

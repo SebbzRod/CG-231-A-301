@@ -1,3 +1,4 @@
+//Creacion de la ventana del navegador
 var WIDTH = window.innerWidth;
 var HEIGHT = window.innerHeight;
 var scene = new THREE.Scene();
@@ -6,9 +7,9 @@ renderer.setSize(WIDTH, HEIGHT);
 renderer.setClearColor(0xDDDDDD, 1);
 document.body.appendChild(renderer.domElement);
 
-var size = 1000;
+var size = 10;
 var arrowSize = 5;
-var divisions = 1000;
+var divisions = 10;
 var origin = new THREE.Vector3( 0, 0, 0 );
 var x = new THREE.Vector3( 1, 0, 0 );
 var y = new THREE.Vector3( 0, 1, 0 );
@@ -28,40 +29,45 @@ var arrowZ = new THREE.ArrowHelper( z, origin, arrowSize, colorB );
 
 //Creacion de la camara
 var camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT);
-camera.position.z = 12;
-camera.position.y = 12;
-camera.position.x = 12;
+camera.position.z = 6;
+camera.position.y = 4;
+camera.position.x = 4;
 const light = new THREE.AmbientLight(0x404040, 5);
 
-var lado = 10;
-var base = 0.2 * lado;
+//Valores parametrizados
+var lado = 2;
+var base = 0.1 * lado;
 
-var beta = 11*Math.PI/6;
-var alfa = Math.PI/2;
-var gamma = 7*Math.PI/4;
+var beta = 25*Math.PI/180;  
+var alfa = 225*Math.PI/180; 
+var gamma = 180*Math.PI/180;
 
 //Generamos las figuras
 const paralepipedo = CrearParalepipedo(lado, base);
 
-//Trasladar objetos
+//Agrupamos las figuras
+var brazo = new THREE.Object3D();
+
+brazo.add(paralepipedo[0]);
+brazo.add(paralepipedo[1]);
+
+//Traslaciones objetos
 TrasladarObjeto(paralepipedo[0], 0, lado/2, 0);
 TrasladarObjeto(paralepipedo[1], 0, 3*lado/2, 0);
-
-//Agrupamos las figuras
-var arm = new THREE.Object3D();
-
-arm.add(paralepipedo[0]);
-arm.add(paralepipedo[1]);
+TrasladarObjeto(paralepipedo[1], -0.368*lado, 1.389*lado, 0);
 
 //Rotamos las figuras
-RotarObjeto(arm, z, beta);
+RotarObjeto(brazo, z, beta);
+/*
+ *Usamos el metodo "rotation.y" ya que este nos permite rotar el brazo alrederdor del eje universal Y, y no 
+ *respecto a los ejes individuales del grupo de figuras, como lo hace la funcion RotarObjeto. 
+*/
+brazo.rotation.y = gamma 
 RotarObjeto(paralepipedo[1], z, alfa);
-TrasladarObjeto(paralepipedo[1], 3*lado/5, 11*lado/10, 0);
-RotarObjeto(paralepipedo[1], z, -gamma);
-TrasladarObjeto(paralepipedo[1], lado/8 + lado/4, 3*lado/2 - lado/10 , 0);
+
 
 //Escena
 scene.add(arrowX, arrowY, arrowZ, gridHelperXZ, camera, light);
-scene.add(arm);
+scene.add(brazo);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);  
 animate();
