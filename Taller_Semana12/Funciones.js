@@ -44,7 +44,7 @@ function RotarObjeto( objeto, eje, angulo) {
     
 }
 /**
- * TrasladarObjeto: Aplica traslacion a un objeto THREE.js en un eje y angulo determinado.  
+ * TrasladarObjeto: Aplica traslacion a un objeto THREE.js.  
  * ENTRADAS: Objeto = Objeto THREE.js que se va a trasladar.
  *           X = Coordenada en X a la sque se va a trasladar el objeto.
  *           Y = Coordenada en Y a la sque se va a trasladar el objeto.
